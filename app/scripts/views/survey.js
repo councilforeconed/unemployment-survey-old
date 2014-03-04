@@ -1,35 +1,32 @@
-/* global UnemploymentSurvey, Backbone */
+/*global define*/
 
-(function (UnemploymentSurvey) {
-  'use strict';
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'templates'
+], function ($, _, Backbone, JST) {
+    'use strict';
 
-  UnemploymentSurvey.SurveyView = Backbone.View.extend({
+    var SurveyView = Backbone.View.extend({
+        template: JST['app/scripts/templates/survey.ejs'],
 
-    //TODO: Set up event listeners to rerender the survey whenever the data change.
+        tagName: 'div',
 
-    className: 'row table-header-row survey-worksheet',
+        id: '',
 
-    render: function () {
-      var view = this;
+        className: '',
 
-      this.$el.append('<div class="row table-header-row">' +
-                        '<div class="col-md-4 table-header">Name of Person</div>' +
-                        '<div class="col-md-2 table-header">Card Number</div>' +
-                        '<div class="col-md-6 table-header">Employment Status</div>' +
-                      '</div>');
+        events: {},
 
-      this.collection.each(function (respondent) {
+        initialize: function () {
+            this.listenTo(this.model, 'change', this.render);
+        },
 
-        var respondentView = new UnemploymentSurvey.RespondentView({
-          model: respondent
-        });
+        render: function () {
+            this.$el.html(this.template(this.model.toJSON()));
+        }
+    });
 
-        view.$el.append(respondentView.render().el);
-
-      }, this);
-
-      return this;
-    }
-  });
-
-})(UnemploymentSurvey);
+    return SurveyView;
+});

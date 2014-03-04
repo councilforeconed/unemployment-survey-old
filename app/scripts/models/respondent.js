@@ -1,10 +1,27 @@
-/* global UnemploymentSurvey, Backbone */
+/*global define*/
 
-(function (UnemploymentSurvey) {
-  'use strict';
+define([
+    'underscore',
+    'backbone'
+], function (_, Backbone) {
+    'use strict';
 
-  UnemploymentSurvey.Respondent = Backbone.Model.extend({
+    var RespondentModel = Backbone.Model.extend({
+        url: '',
 
-  });
+        initialize: function() {
+        },
 
-})(UnemploymentSurvey);
+        defaults: {
+        },
+
+        validate: function(attrs, options) {
+        },
+
+        parse: function(response, options)  {
+            return response;
+        }
+    });
+
+    return RespondentModel;
+});

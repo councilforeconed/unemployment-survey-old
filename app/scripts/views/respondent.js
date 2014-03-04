@@ -1,31 +1,32 @@
-/* global UnemploymentSurvey, Backbone */
+/*global define*/
 
-(function (UnemploymentSurvey) {
-  'use strict';
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'templates'
+], function ($, _, Backbone, JST) {
+    'use strict';
 
+    var RespondentView = Backbone.View.extend({
+        template: JST['app/scripts/templates/respondent.ejs'],
 
-  UnemploymentSurvey.RespondentView = Backbone.View.extend({
+        tagName: 'div',
 
-    initialize: function () {
+        id: '',
 
-      if (!this.model) {
-        throw new Error('You must provide a model.');
-      }
+        className: '',
 
-      this.listenTo(this.model, 'remove', this.remove);
-    },
+        events: {},
 
-    className: 'survey-respondent row',
+        initialize: function () {
+            this.listenTo(this.model, 'change', this.render);
+        },
 
-    render: function () {
-      this.$el.html(
-                    '<div class="col-md-4 respondent-information">' + this.model.get('name') + '</div>' +
-                    '<div class="col-md-2 respondent-information">Card Number</div>' +
-                    '<div class="col-md-6 respondent-information">Employment Status</div>'
-                    );
+        render: function () {
+            this.$el.html(this.template(this.model.toJSON()));
+        }
+    });
 
-      return this;
-    }
-  });
-
-})(UnemploymentSurvey);
+    return RespondentView;
+});

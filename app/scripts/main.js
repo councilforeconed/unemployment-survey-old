@@ -1,14 +1,33 @@
-/* global UnemploymentSurvey, Backbone */
+/*global require*/
+'use strict';
 
-(function (UnemploymentSurvey) {
-  'use strict';
+require.config({
+    shim: {
+        underscore: {
+            exports: '_'
+        },
+        backbone: {
+            deps: [
+                'underscore',
+                'jquery'
+            ],
+            exports: 'Backbone'
+        },
+        bootstrap: {
+            deps: ['jquery'],
+            exports: 'jquery'
+        }
+    },
+    paths: {
+        jquery: '../bower_components/jquery/jquery',
+        backbone: '../bower_components/backbone/backbone',
+        underscore: '../bower_components/underscore/underscore',
+        bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap'
+    }
+});
 
-  var survey = new UnemploymentSurvey.Survey([{ name: 'Yourself' }]);
-
-  var surveyView = new UnemploymentSurvey.SurveyView({
-    el: '#unemployment-survey',
-    collection: survey
-  });
-  surveyView.render();
-
-})(UnemploymentSurvey);
+require([
+    'backbone'
+], function (Backbone) {
+    Backbone.history.start();
+});
