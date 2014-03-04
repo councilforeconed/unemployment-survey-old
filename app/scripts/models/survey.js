@@ -3,7 +3,7 @@
 (function (UnemploymentSurvey) {
   'use strict';
 
-  UnemploymentSurvey.Survey = Backbone.Model.extend({
+  UnemploymentSurvey.Survey = Backbone.Collection.extend({
 
   });
 
