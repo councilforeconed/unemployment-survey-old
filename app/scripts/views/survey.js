@@ -7,7 +7,7 @@
 
     //TODO: Set up event listeners to rerender the survey whenever the data change.
 
-    className: 'survey-worksheet',
+    className: 'row table-header-row survey-worksheet',
 
     render: function () {
       var view = this;
@@ -16,7 +16,7 @@
                         '<div class="col-md-4 table-header">Name of Person</div>' +
                         '<div class="col-md-2 table-header">Card Number</div>' +
                         '<div class="col-md-6 table-header">Employment Status</div>' +
-                      '</row>');
+                      '</div>');
 
       this.collection.each(function (respondent) {
 
