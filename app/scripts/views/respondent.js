@@ -1,63 +1,63 @@
 /*global define*/
 
 define([
-    'jquery',
-    'underscore',
-    'backbone',
-    'templates'
+  'jquery',
+  'underscore',
+  'backbone',
+  'templates'
 ], function ($, _, Backbone, JST) {
-    'use strict';
+  'use strict';
 
-    var RespondentView = Backbone.View.extend({
-        template: JST['app/scripts/templates/respondent.ejs'],
+  var RespondentView = Backbone.View.extend({
+    template: JST['app/scripts/templates/respondent.ejs'],
 
-        tagName: 'tr',
+    tagName: 'tr',
 
-        className: 'respondent',
+    className: 'respondent',
 
-        events: {
-            'keyup .name-field': 'changeName',
-            'change .card-number': 'changeCardNumber',
-            'change .employment-status': 'changeEmploymentStatus'
-        },
+    events: {
+      'keyup .name-field': 'changeName',
+      'change .card-number': 'changeCardNumber',
+      'change .employment-status': 'changeEmploymentStatus'
+    },
 
-        initialize: function () {
-            this.listenTo(this.model, 'remove', this.remove);
-        },
+    initialize: function () {
+      this.listenTo(this.model, 'remove', this.remove);
+    },
 
-        render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
-            this.$('select').prop("selectedIndex", -1);
+    render: function () {
+      this.$el.html(this.template(this.model.toJSON()));
+      this.$('select').prop('selectedIndex', -1);
 
-            if (this.model.has('employmentStatus')) {
-              this.$('.employment-status')
-                .val(this.model.get('employmentStatus'));
-            }
+      if (this.model.has('employmentStatus')) {
+        this.$('.employment-status')
+        .val(this.model.get('employmentStatus'));
+      }
 
-            if (this.model.has('cardNumber')) {
-              this.$('.card-number')
-                .val(this.model.get('cardNumber'));
-            }
+      if (this.model.has('cardNumber')) {
+        this.$('.card-number')
+        .val(this.model.get('cardNumber'));
+      }
 
-            return this;
-        },
+      return this;
+    },
 
-        changeName: function () {
-            var name = this.$('.name-field').val();
-            this.model.set('name', name);
-        },
+    changeName: function () {
+      var name = this.$('.name-field').val();
+      this.model.set('name', name);
+    },
 
-        changeCardNumber: function () {
-            var card = this.$('.card-number').val();
-            this.model.set('cardNumber', card);
-        },
+    changeCardNumber: function () {
+      var card = this.$('.card-number').val();
+      this.model.set('cardNumber', card);
+    },
 
-        changeEmploymentStatus: function () {
-            var status = this.$('.employment-status').val();
-            this.model.set('employmentStatus', status);
-        }
+    changeEmploymentStatus: function () {
+      var status = this.$('.employment-status').val();
+      this.model.set('employmentStatus', status);
+    }
 
-    });
+  });
 
-    return RespondentView;
+  return RespondentView;
 });
