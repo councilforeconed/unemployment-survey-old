@@ -1,2 +1,23 @@
-<p>Your content here.</p>
-
+<td>
+  <input type="text" class="form-control name-field" value="<%= data.name %>">
+</td>
+<td>
+  <select class="form-control card-number">
+    <% for (var i = 0; i < 32; i++) {%>
+        <option><%= i %></option>
+    <% } %>
+  </select>
+</td>
+<td>
+  <select class="form-control employment-status">
+    <option>Neither</option>
+    <option>Employed</option>
+    <option>Unemployed</option>
+    <option>Young or Institutionalized</option>
+  </select>
+</td>
+<td>
+  <button class="btn btn-danger remove-respondent" data-id="<%= data.id %>">
+    <span class="glyphicon glyphicon-remove"></span>
+  </button>
+</td>

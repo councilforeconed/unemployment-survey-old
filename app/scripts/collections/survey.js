@@ -3,12 +3,19 @@
 define([
     'underscore',
     'backbone',
-    'models/respondent'
-], function (_, Backbone, SurveyModel) {
+    'models/respondent',
+    'views/survey'
+], function (_, Backbone, RespondentModel, SurveyView) {
     'use strict';
 
     var SurveyCollection = Backbone.Collection.extend({
-        model: RespondentModel
+        model: RespondentModel,
+
+        initialize: function () {
+          this.view = new SurveyView({
+            collection: this
+          });
+        }
     });
 
     return SurveyCollection;

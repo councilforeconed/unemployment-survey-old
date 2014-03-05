@@ -254,6 +254,11 @@ module.exports = function (grunt) {
                 amd: true
             },
             compile: {
+                options: {
+                    templateSettings: {
+                        variable: 'data'
+                    }
+                },
                 files: {
                     '.tmp/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
                 }

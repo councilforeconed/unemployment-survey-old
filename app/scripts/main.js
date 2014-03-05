@@ -19,7 +19,7 @@ require.config({
         }
     },
     paths: {
-        jquery: '../bower_components/jquery/jquery',
+        jquery: '../bower_components/jquery/dist/jquery',
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap'
@@ -27,7 +27,9 @@ require.config({
 });
 
 require([
-    'backbone'
-], function (Backbone) {
+    'backbone',
+    'views/application'
+], function (Backbone, ApplicationView) {
     Backbone.history.start();
+    window.Application = new ApplicationView();
 });

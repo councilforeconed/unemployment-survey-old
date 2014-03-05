@@ -11,20 +11,27 @@ define([
     var SurveyView = Backbone.View.extend({
         template: JST['app/scripts/templates/survey.ejs'],
 
-        tagName: 'div',
+        el: 'tbody.survey',
 
-        id: '',
-
-        className: '',
-
-        events: {},
+        events: {
+            'click .remove-respondent': 'removeRespondent'
+        },
 
         initialize: function () {
-            this.listenTo(this.collection, 'change', this.render);
+            this.listenTo(this.collection, 'add', this.render);
+            this.listenTo(this.collection, 'remove', this.render);
         },
 
         render: function () {
-            this.$el.html(this.template(this.collection.toJSON()));
+            this.collection.each(function (respondent) {
+              this.$el.append(respondent.view.render().el);
+            }, this);
+            return this;
+        },
+
+        removeRespondent: function (e) {
+          var id = $(e.currentTarget).data('id');
+          var model = this.collection.remove(id);
         }
     });
 

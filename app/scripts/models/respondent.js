@@ -2,20 +2,24 @@
 
 define([
     'underscore',
-    'backbone'
-], function (_, Backbone) {
+    'backbone',
+    'views/respondent'
+], function (_, Backbone, RespondentView) {
     'use strict';
 
     var RespondentModel = Backbone.Model.extend({
-        url: '',
-
         initialize: function() {
+          this.view = new RespondentView({ model: this })
         },
 
         defaults: {
+          name: 'New Respondent'
         },
 
-        validate: function(attrs, options) {
+        toJSON: function () {
+          var json = _.clone(this.attributes);
+          json.id = this.cid;
+          return json;
         },
 
         parse: function(response, options)  {
