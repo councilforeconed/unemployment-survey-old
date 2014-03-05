@@ -28,22 +28,33 @@ define([
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             this.$('select').prop("selectedIndex", -1);
+
+            if (this.model.has('employmentStatus')) {
+              this.$('.employment-status')
+                .val(this.model.get('employmentStatus'));
+            }
+
+            if (this.model.has('cardNumber')) {
+              this.$('.card-number')
+                .val(this.model.get('cardNumber'));
+            }
+
             return this;
         },
 
         changeName: function () {
-          var name = this.$('.name-field').val();
-          this.model.set('name', name);
+            var name = this.$('.name-field').val();
+            this.model.set('name', name);
         },
 
         changeCardNumber: function () {
-          var card = this.$('.card-number').val();
-          this.model.set('cardNumber', card);
+            var card = this.$('.card-number').val();
+            this.model.set('cardNumber', card);
         },
 
         changeEmploymentStatus: function () {
-          var status = this.$('.employment-status').val();
-          this.model.set('employmentStatus', status);
+            var status = this.$('.employment-status').val();
+            this.model.set('employmentStatus', status);
         }
 
     });
