@@ -6,8 +6,8 @@ define([
   'backbone',
   'templates',
   'collections/survey',
-  'models/respondent'
-], function ($, _, Backbone, JST, SurveyCollection) {
+  'views/unemployment-rate'
+], function ($, _, Backbone, JST, SurveyCollection, UnemploymentRateView) {
   'use strict';
 
   var ApplicationView = Backbone.View.extend({
@@ -23,6 +23,7 @@ define([
       this.render();
       this.collection = new SurveyCollection({ name: 'Yourself' });
       this.collection.view.render();
+      this.unemploymentRate = new UnemploymentRateView(this.collection);
     },
 
     render: function () {
