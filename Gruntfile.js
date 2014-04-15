@@ -27,6 +27,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
+    pkg: grunt.file.readJSON('package.json'),
     watch: {
       options: {
         nospawn: true,
@@ -276,6 +277,13 @@ module.exports = function (grunt) {
           ]
         }
       }
+    },
+    exec: {
+      deploy: {
+        command: 'scp -r dist/* cee:~/technology/<%= pkg.name %>',
+        stdout: true,
+        stderr: true
+      }
     }
   });
 
@@ -352,6 +360,11 @@ module.exports = function (grunt) {
     'copy',
     'rev',
     'usemin'
+  ]);
+  
+  grunt.registerTask('deploy', [
+    'build',
+    'exec:deploy'
   ]);
 
   grunt.registerTask('default', [
